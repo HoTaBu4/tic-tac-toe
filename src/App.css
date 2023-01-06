@@ -1,38 +1,93 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.board{
+  display: grid;
+  grid-template: repeat(3,180px)/repeat(3,180px);
+  gap: 10px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.cell{
+  height: 180px;
+  width: 180px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ------game-board------------------- */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+  border-bottom: 10px solid black;
+}
+.cell:nth-child(2),
+.cell:nth-child(5),
+.cell:nth-child(8){
+  border-right: 10px solid black;
+}
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7){
+  border-right: 10px solid black;
+}
+.cell:nth-child(4),
+.cell:nth-child(5),
+.cell:nth-child(6){
+  border-bottom: 10px solid black;
+}
+/* ---xxxxxxxxxxxxxxxxxxxxxxx--- */
+.cell{
+  position: relative;
+}
+.cell.x::after,
+.cell.x::before{
+  content: '';
+  position: absolute;
+  top: 50%;
   display: flex;
+  width: 100%;
+  height: 15px;
+  background-color: black;
+}
+.cell.x::after{
+  transform: rotate(45deg);
+}
+.cell.x::before{
+  transform: rotate(-45deg);
+}
+/*--oooooooooooooooooooooooo--*/
+.cell.o::after,
+.cell.o:before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+}
+.cell.o::after{
+  background-color: black;
+}
+.cell.o:before{
+  background-color: white;
+  height: 60%;
+  width: 60%;
+  z-index: 100;
+}
+.winner_Table{
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display:flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-size: 50px;
+  color: beige;
+  background-color: rgba(0, 0, 0, 0.8)
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.winner_block{
+  display: flex;
+  flex-direction: row;
 }
