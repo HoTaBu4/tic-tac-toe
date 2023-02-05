@@ -7,20 +7,29 @@ const Board = ({reset,setReset,winner,setWinner}) => {
                                       '','',''])
     let elems = document.getElementsByClassName('cell')
     const sign = turn ? 'x' : 'o'
+  
     const Draw = (cell,e) =>  {
         
         if (e.target.className.includes('cell')) {
             //checking the cell
             if (e.target.className.match(/[xo]/g) === null){ 
-                //adding a sign to the cell
+                //adding a sign to the cell and to the useState
                 elems[Number(cell) -1].classList.add(sign)
                 setTurn((prev) => !prev) 
                 board[cell - 1] = sign 
             }
-
         }
-        
     }
+    //reseting the board
+    useEffect(() =>{
+               setBoard(['','','','','','','','',''])
+               setWinner('')
+               setReset(false)
+               for (const elem of elems) {
+                    elem.classList.remove('o')
+                    elem.classList.remove('x')
+               }
+    },[reset,setReset,setWinner])
     useEffect(() =>{
         //ckeck the board for the winner
         const checkCol = () =>{
@@ -62,16 +71,16 @@ const Board = ({reset,setReset,winner,setWinner}) => {
     
     return(
         <div className='board'>
-           <div className='cell' onClick={(e) => Draw(1,e)}>1</div>
-           <div className='cell' onClick={(e) => Draw(2,e)}>2</div>
-           <div className='cell' onClick={(e) => Draw(3,e)}>3</div>
-           <div className='cell' onClick={(e) => Draw(4,e)}>4</div>
-           <div className='cell' onClick={(e) => Draw(5,e)}>5</div>
-           <div className='cell' onClick={(e) => Draw(6,e)}>6</div>
-           <div className='cell' onClick={(e) => Draw(7,e)}>7</div>
-           <div className='cell' onClick={(e) => Draw(8,e)}>8</div>
-           <div className='cell' onClick={(e) => Draw(9,e)}>9</div>
-    </div>
+           <div className='cell' onClick={(e) => Draw(1,e)}></div>
+           <div className='cell' onClick={(e) => Draw(2,e)}></div>
+           <div className='cell' onClick={(e) => Draw(3,e)}></div>
+           <div className='cell' onClick={(e) => Draw(4,e)}></div>
+           <div className='cell' onClick={(e) => Draw(5,e)}></div>
+           <div className='cell' onClick={(e) => Draw(6,e)}></div>
+           <div className='cell' onClick={(e) => Draw(7,e)}></div>
+           <div className='cell' onClick={(e) => Draw(8,e)}></div>
+           <div className='cell' onClick={(e) => Draw(9,e)}></div>
+        </div>
     )
 }
 export default Board
